@@ -15,10 +15,6 @@ app.use(cors());
 app.use(express.json());
 app.use('/api', router);
 
-// app.get('/', (req, res) =>{
-//     res.status(200).json({message: 'Working!'});
-// });
-
 const start = async() => {
     try {
         await sequelize.authenticate().then(console.log('Connect to DB successful'.bgMagenta));

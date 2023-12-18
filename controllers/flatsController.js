@@ -3,7 +3,12 @@ const {Flat} = require('../models/models');
 class FlatsController {
     async getAll(req, res) {
         try {
-            const flats = await Flat.findAll();
+            let {limit, page} = req.query;
+            page = page || 1;
+            limit = limit || 10;
+            let offset = page * limit - limit;;
+
+            const flats = await Flat.findAndCountAll({limit, offset});
             return res.json(flats);
         } catch(err) {
             res.status(400).json(err.message);
