@@ -5,8 +5,8 @@ class FlatsController {
         try {
             let {limit, page} = req.query;
             page = page || 1;
-            limit = limit || 10;
-            let offset = page * limit - limit;;
+            limit = Number(limit) || 10;
+            let offset = page * limit - limit;
 
             const flats = await Flat.findAndCountAll({limit, offset});
             return res.json(flats);
