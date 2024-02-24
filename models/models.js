@@ -26,4 +26,34 @@ Flat.init(
     }
 );
 
-module.exports = {Flat};
+const User = sequelize.define('user', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    email: {type: DataTypes.STRING, unique: true},
+    password: {type: DataTypes.STRING},
+    isActivated: {type: DataTypes.BOOLEAN, default: false},
+    activationLink: {type: DataTypes.STRING}
+});
+
+const Like = sequelize.define('like', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    idOfFlat: {type: DataTypes.INTEGER, allowNull: false}
+});
+
+const Compare = sequelize.define('compare', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    idOfFlat: {type: DataTypes.INTEGER, allowNull: false}
+});
+
+User.hasMany(Like);
+Like.belongsTo(User);
+
+User.hasMany(Compare);
+Compare.belongsTo(User);
+
+
+module.exports = {
+    Flat,
+    User,
+    Like,
+    Compare
+};
