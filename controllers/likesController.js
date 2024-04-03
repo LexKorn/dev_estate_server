@@ -14,6 +14,12 @@ class LikesController {
             const {id} = req.user;
             let {idOfFlat} = req.body;
 
+            let candidate = await Like.findAll({where: {userId: id}});
+            candidate = candidate.filter(item => item.idOfFlat ===  idOfFlat);
+            if (Boolean(candidate.length)) {
+                return res.status(400).json({message: "Такая квартира уже существует!"});
+            }
+
             const like = await Like.create({idOfFlat, userId: id});            
             return res.json(_transformLike(like));
 
@@ -35,7 +41,7 @@ class LikesController {
     async delete(req, res) {
         try {
             const {id} = req.params;
-            await Like.destroy({where: {userId: req.user.id, id}});
+            await Like.destroy({where: {userId: req.user.id, idOfFlat: id}});
             return res.json('Like was deleted');
 
         } catch(err) {
