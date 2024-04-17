@@ -14,12 +14,6 @@ class LikesController {
             const {id} = req.user;
             let {idOfFlat} = req.body;
 
-            let candidate = await Like.findAll({where: {userId: id}});
-            candidate = candidate.filter(item => item.idOfFlat ===  idOfFlat);
-            if (Boolean(candidate.length)) {
-                return res.status(400).json({message: "Такая квартира уже существует!"});
-            }
-
             const like = await Like.create({idOfFlat, userId: id});            
             return res.json(_transformLike(like));
 

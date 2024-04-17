@@ -35,7 +35,7 @@ class ComparesController {
     async delete(req, res) {
         try {
             const {id} = req.params;
-            await Compare.destroy({where: {userId: req.user.id, id}});
+            await Compare.destroy({where: {userId: req.user.id, idOfFlat: id}});
             return res.json('Compare was deleted');
 
         } catch(err) {
