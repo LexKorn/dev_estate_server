@@ -44,11 +44,20 @@ const Compare = sequelize.define('compare', {
     idOfFlat: {type: DataTypes.INTEGER, allowNull: false}
 });
 
+const Message = sequelize.define('message', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    text: {type: DataTypes.STRING},
+    sender: {type: DataTypes.STRING, allowNull: false}
+});
+
 User.hasMany(Like);
 Like.belongsTo(User);
 
 User.hasMany(Compare);
 Compare.belongsTo(User);
+
+User.hasMany(Message);
+Message.belongsTo(User);
 
 
 module.exports = {
