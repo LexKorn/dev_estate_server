@@ -64,5 +64,6 @@ module.exports = {
     Flat,
     User,
     Like,
-    Compare
+    Compare,
+    Message
 };

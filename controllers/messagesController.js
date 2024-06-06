@@ -33,11 +33,10 @@ class MessagesController {
         }
     }
 
-    async delete(req, res) {
+    async deleteAll(req, res) {
         try {
-            const {id} = req.params;
-            await Message.destroy({where: {userId: req.user.id, id: id}});
-            return res.json('Message was deleted');
+            await Message.destroy({where: {userId: req.user.id}});
+            return res.json('All messages were deleted');
 
         } catch(err) {
             res.status(400).json(err.message);
