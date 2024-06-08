@@ -31,7 +31,10 @@ class MessagesController {
             let {text, sender} = req.body;
 
             const message = await Message.create({text, sender, userId: id});
-            const receivedMessage = await Message.create({text: `${answers[index(answers)]}`, sender: 'system', userId: id});
+
+            setTimeout(() => {
+                Message.create({text: `${answers[index(answers)]}`, sender: 'system', userId: id});
+            }, 3000);
 
             return res.json(_transformMessage(message));
         } catch(err) {
