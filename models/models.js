@@ -44,6 +44,11 @@ const Compare = sequelize.define('compare', {
     idOfFlat: {type: DataTypes.INTEGER, allowNull: false}
 });
 
+const Reserve = sequelize.define('reserve', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    idOfFlat: {type: DataTypes.INTEGER, allowNull: false}
+});
+
 const Message = sequelize.define('message', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     text: {type: DataTypes.STRING},
@@ -56,6 +61,9 @@ Like.belongsTo(User);
 User.hasMany(Compare);
 Compare.belongsTo(User);
 
+User.hasOne(Reserve);
+Reserve.belongsTo(User);
+
 User.hasMany(Message);
 Message.belongsTo(User);
 
@@ -65,5 +73,6 @@ module.exports = {
     User,
     Like,
     Compare,
+    Reserve,
     Message
 };
