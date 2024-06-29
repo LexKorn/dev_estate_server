@@ -32,6 +32,17 @@ class ReservesController {
         }
     }
 
+    async update(req, res) {
+        try {
+            const {id} = req.user;
+            let {idOfFlat} = req.body;
+            const reserve = await Reserve.update({idOfFlat}, {where:{userId: id}});
+            return res.json(_transformReserve(reserve));
+        } catch(err) {
+            res.status(400).json(err.message);
+        }
+    }
+
     async delete(req, res) {
         try {
             const {id} = req.params;

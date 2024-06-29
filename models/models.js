@@ -46,7 +46,7 @@ const Compare = sequelize.define('compare', {
 
 const Reserve = sequelize.define('reserve', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    idOfFlat: {type: DataTypes.INTEGER, allowNull: false}
+    idOfFlat: {type: DataTypes.INTEGER}
 });
 
 const Message = sequelize.define('message', {
